@@ -11,15 +11,15 @@ public class Main {
         PegawaiAdmin pegawaiAdmin = new PegawaiAdmin();
         
         // Membuat 3 pelanggan dan invoice mereka
-        Pelanggan pelanggan1 = pegawaiAdmin.createInvoice("Jane Smith", "Jl. Contoh No. 2", 987654321, 1, "2024-12-23", "Pesanan Reguler", 10000, false, "dalam antrian");
-        Pelanggan pelanggan2 = pegawaiAdmin.createInvoice("Bob Brown", "Jl. Contoh No. 3", 123123123, 2, "2024-12-24", "Pesanan Ekspres", 15000, false, "dalam antrian");
-        Pelanggan pelanggan3 = pegawaiAdmin.createInvoice("Alice Johnson", "Jl. Contoh No. 4", 456456456, 3, "2024-12-25", "Pesanan Khusus", 20000, false, "dalam antrian");
+        Pelanggan pelanggan1 = pegawaiAdmin.createInvoice("Ahmad Uffi", "Jl. Krangklesem No. 2", 987654321, 1, "2024-12-23", "Pesanan Reguler", 10000, false, "dalam antrian");
+        Pelanggan pelanggan2 = pegawaiAdmin.createInvoice("salman alfarisi", "puri hijau", 123123123, 2, "2024-12-24", "Pesanan Ekspres", 15000, false, "dalam antrian");
+        Pelanggan pelanggan3 = pegawaiAdmin.createInvoice("Gilang", "Kobon dalmen", 456456456, 3, "2024-12-25", "Pesanan Khusus", 20000, false, "dalam antrian");
         
         // Membuat pegawai
-        PegawaiPencucian pegawaiPencucian = new PegawaiPencucian("John Doe", "Jl. Pencucian No. 1", 123456789, pegawaiAdmin);
-        PegawaiPengeringan pegawaiPengeringan = new PegawaiPengeringan("Alice Smith", "Jl. Pengeringan No. 2", 987654321, pegawaiAdmin);
-        PegawaiPenyetrikaan pegawaiPenyetrikaan = new PegawaiPenyetrikaan("Charlie Johnson", "Jl. Penyetrikaan No. 3", 456456456, pegawaiAdmin);
-        PegawaiPengantaran pegawaiPengantaran = new PegawaiPengantaran("Diana Prince", "Jl. Pengantaran No. 4", 789789789, pegawaiAdmin);
+        PegawaiPencucian pegawaiPencucian = new PegawaiPencucian("satria", "Jl. aston No. 1", 123456789, pegawaiAdmin);
+        PegawaiPengeringan pegawaiPengeringan = new PegawaiPengeringan("Rifki", "Jl. pureokerto kidul No. 2", 987654321, pegawaiAdmin);
+        PegawaiPenyetrikaan pegawaiPenyetrikaan = new PegawaiPenyetrikaan("Ramadhan", "Jl. andhang No. 3", 456456456, pegawaiAdmin);
+        PegawaiPengantaran pegawaiPengantaran = new PegawaiPengantaran("Lestari", "Jl. Brawijaya No. 4", 789789789, pegawaiAdmin);
         
         // Proses untuk pelanggan 1
         System.out.println("=== Proses Pelanggan 1 ===");
