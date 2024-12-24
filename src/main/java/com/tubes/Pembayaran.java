@@ -1,52 +1,47 @@
 package com.tubes;
 
 public class Pembayaran implements IPembayaran {
+    private Invoice invoice; // Referensi ke invoice yang akan dibayar
 
-    public Pembayaran(String nama, String alamat, int noHp) {
-        // Konstruktor, jika diperlukan
+    public Pembayaran(Invoice invoice) {
+        this.invoice = invoice; // Inisialisasi invoice
     }
 
     @Override
     public void bayarEwallet(int nomorHpBisnis, int nominal) {
-        System.out.println("Pembayaran menggunakan eWallet berhasil.");
-        System.out.println("Nomor HP Bisnis: " + nomorHpBisnis);
-        System.out.println("Nominal: " + nominal);
+        if (nominal >= invoice.getBiayaTagihan()) {
+            System.out.println("Pembayaran menggunakan eWallet berhasil.");
+            System.out.println("Nomor HP Bisnis: " + nomorHpBisnis);
+            System.out.println("Nominal: " + nominal);
+            invoice.setStatusLaundry("selesai"); // Mengubah status invoice menjadi selesai
+            System.out.println("Status invoice telah diubah menjadi 'selesai'.");
+        } else {
+            System.out.println("Pembayaran gagal. Nominal tidak cukup.");
+        }
     }
 
     @Override
     public void bayarQris(int nomorHpBisnis, int nominal) {
-        System.out.println("Pembayaran menggunakan QRIS berhasil.");
-        System.out.println("Nomor HP Bisnis: " + nomorHpBisnis);
-        System.out.println("Nominal: " + nominal);
+        if (nominal >= invoice.getBiayaTagihan()) {
+            System.out.println("Pembayaran menggunakan QRIS berhasil.");
+            System.out.println("Nomor HP Bisnis: " + nomorHpBisnis);
+            System.out.println("Nominal: " + nominal);
+            invoice.setStatusLaundry("selesai"); // Mengubah status invoice menjadi selesai
+            System.out.println("Status invoice telah diubah menjadi 'selesai'.");
+        } else {
+            System.out.println("Pembayaran gagal. Nominal tidak cukup.");
+        }
     }
 
     @Override
     public void bayarCash(int nominal) {
-        System.out.println("Pembayaran tunai berhasil.");
-        System.out.println("Nominal: " + nominal);
+        if (nominal >= invoice.getBiayaTagihan()) {
+            System.out.println("Pembayaran tunai berhasil.");
+            System.out.println("Nominal: " + nominal);
+            invoice.setStatusLaundry("selesai"); // Mengubah status invoice menjadi selesai
+            System.out.println("Status invoice telah diubah menjadi 'selesai'.");
+        } else {
+            System.out.println("Pembayaran gagal. Nominal tidak cukup.");
+        }
     }
 }
-
-
-
-// package com.tubes;
-
-// public class Pembayaran implements IPembayaran{
-//     // private int nomorHpBisnis;
-//     // private int nominal;
-//     private Invoice[] tagihan; 
-
-//     public Pembayaran(String nama, String alamat, int noHp){
-//         // super(nama,alamat,noHp);
-//     }
-//     public void bayarEwallet(int nomorHpBisnis, int nominal){
-        
-//     }
-//     public void bayarQris(int nomorHpBisnis, int nominal){
-
-//     }
-//     public void bayarCash(int nominal){
-
-//     }
-
-// }

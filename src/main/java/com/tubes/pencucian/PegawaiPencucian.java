@@ -7,13 +7,14 @@ public class PegawaiPencucian extends Pencucian implements Iperson {
     private String nama;
     private String alamat;
     private int noHp;
+    private PegawaiAdmin pegawaiAdmin;
 
-    // Konstruktor yang menerima PegawaiAdmin sebagai parameter
     public PegawaiPencucian(String nama, String alamat, int noHp, PegawaiAdmin pegawaiAdmin) {
         super(pegawaiAdmin); // Memanggil konstruktor Pencucian
         this.nama = nama;
         this.alamat = alamat;
         this.noHp = noHp;
+        this.pegawaiAdmin = pegawaiAdmin; // Menyimpan referensi PegawaiAdmin
     }
 
     @Override
@@ -29,5 +30,11 @@ public class PegawaiPencucian extends Pencucian implements Iperson {
     @Override
     public int getNoHp() {
         return this.noHp;
+    }
+
+    // Metode untuk mencetak invoice
+    @Override
+    public void cetakInvoice(int idInvoice) {
+        pegawaiAdmin.cetakInvoice(idInvoice);
     }
 }

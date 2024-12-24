@@ -1,14 +1,13 @@
 package com.tubes;
 
-public class Pelanggan extends Pembayaran {
+import com.tubes.admin.PegawaiAdmin;
 
+public class Pelanggan {
     private String nama;
     private String alamat;
     private int noHp;
-    private Invoice invoice; 
 
     public Pelanggan(String nama, String alamat, int noHp) {
-        super(nama, alamat, noHp); 
         this.nama = nama;
         this.alamat = alamat;
         this.noHp = noHp;
@@ -26,70 +25,32 @@ public class Pelanggan extends Pembayaran {
         return noHp;
     }
 
-    // Set invoice pelanggan
+    public void bayarTagihan(Invoice invoice, int nominal, String metodePembayaran) {
+        Pembayaran pembayaran = new Pembayaran(invoice); // Membuat objek Pembayaran dengan invoice yang akan dibayar
 
-    // Dapatkan invoice pelanggan
-
-    // Bayar tagihan
-    public void bayarTagihan(String metode, int nominal, int nomorHpBisnis) {
-        if (invoice == null) {
-            System.out.println("Tidak ada tagihan yang harus dibayar.");
-            return;
-        }
-
-        if (nominal < invoice.getBiayaTagihan()) {
-            System.out.println("Pembayaran gagal. Nominal kurang dari biaya tagihan.");
-            return;
-        }
-
-        switch (metode.toLowerCase()) {
+        switch (metodePembayaran.toLowerCase()) {
             case "ewallet":
-                bayarEwallet(nomorHpBisnis, nominal);
+                pembayaran.bayarEwallet(noHp, nominal);
                 break;
             case "qris":
-                bayarQris(nomorHpBisnis, nominal);
+                pembayaran.bayarQris(noHp, nominal);
                 break;
             case "cash":
-                bayarCash(nominal);
+                pembayaran.bayarCash(nominal);
                 break;
             default:
                 System.out.println("Metode pembayaran tidak valid.");
+                break;
         }
+    }
 
-        // Setelah pembayaran sukses, tandai tagihan sebagai sudah dibayar
-        // invoice.setStatusPembayaran(true);
-        System.out.println("Tagihan telah dibayar. Terima kasih!");
-        
-        
-
+    // Metode untuk mengecek status pencucian
+    public void cekStatusPencucian(PegawaiAdmin pegawaiAdmin, int idInvoice) {
+        Invoice invoice = pegawaiAdmin.getInvoice(idInvoice); // Mengambil invoice berdasarkan ID
+        if (invoice != null) {
+            System.out.println("Status Pencucian untuk Invoice ID " + idInvoice + ": " + invoice.getStatusLaundry());
+        } else {
+            System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
+        }
     }
 }
-
-
-
-// package com.tubes;
-
-// public class Pelanggan extends Pembayaran implements Iperson{
-
-//     private String nama;
-//     private String alamat;
-//     private int noHp;
-
-//     public Pelanggan(String nama, String alamat, int noHp){
-//         this.nama = nama;
-//         this.alamat = alamat;
-//         this.noHp = noHp;
-//     }
-
-//     public String getNama(){
-//         return nama;
-//     }
-
-//     public String getAlamat(){
-//         return alamat;
-//     }
-
-//     public int getNoHp(){
-//         return noHp;
-//     }
-// }

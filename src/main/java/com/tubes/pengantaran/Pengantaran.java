@@ -1,4 +1,5 @@
 package com.tubes.pengantaran;
+
 import com.tubes.Invoice;
 import com.tubes.admin.PegawaiAdmin;
 
@@ -9,21 +10,23 @@ public class Pengantaran {
         this.pegawaiAdmin = pegawaiAdmin;
     }
 
-    // Metode untuk mengganti status laundry
+    // Metode untuk memulai pengantaran
     public void mulaiPengantaran(int idInvoice) {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
             invoice.setStatusLaundry("Sedang di Antar"); // Mengubah status laundry
-            System.out.println("Status laundry untuk Invoice ID " + idInvoice + "'Sedang di Antar'.");
+            System.out.println("Status laundry untuk Invoice ID " + idInvoice + " telah diubah menjadi 'Sedang di Antar'.");
         } else {
             System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
         }
     }
-    public void SelesaiPengantaran(int idInvoice) {
+
+    // Metode untuk menyelesaikan pengantaran
+    public void selesaiPengantaran(int idInvoice) {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
-            invoice.setStatusLaundry("Laundry telah selesai"); // Mengubah status laundry
-            System.out.println("Status laundry untuk Invoice ID " + idInvoice + "'Menunggu pembayaran dari pelanggan'.");
+            invoice.setStatusLaundry("Laundry telah sampai di tujuan"); // Mengubah status laundry
+            System.out.println("Status laundry untuk Invoice ID " + idInvoice + " telah diubah menjadi 'Laundry telah selesai'.");
         } else {
             System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
         }
@@ -34,9 +37,9 @@ public class Pengantaran {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
             System.out.println("Invoice ID: " + invoice.getIdInvoice());
-            System.out.println("Nama: " + invoice.getNama());
-            System.out.println("Alamat: " + invoice.getAlamat());
-            System.out.println("No HP: " + invoice.getNoHp());
+            System.out.println("Nama: " + invoice.getNamaPelanggan());
+            System.out.println("Alamat: " + invoice.getAlamatPelanggan());
+            System.out.println("No HP: " + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
             System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
@@ -46,4 +49,4 @@ public class Pengantaran {
             System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
         }
     }
-    }
+}

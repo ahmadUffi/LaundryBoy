@@ -4,7 +4,7 @@ import com.tubes.Invoice;
 import com.tubes.Iperson;
 import com.tubes.admin.PegawaiAdmin;
 
-public class PegawaiPengeringan extends Pengeringan implements Iperson{
+public class PegawaiPengeringan extends Pengeringan implements Iperson {
     private String nama;
     private String alamat;
     private int noHp;
@@ -15,16 +15,16 @@ public class PegawaiPengeringan extends Pengeringan implements Iperson{
         this.nama = nama;
         this.alamat = alamat;
         this.noHp = noHp;
-        this.pegawaiAdmin = pegawaiAdmin;
+        this.pegawaiAdmin = pegawaiAdmin; // Menyimpan referensi PegawaiAdmin
     }
 
     public void cetakInvoice(int idInvoice) {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
             System.out.println("Invoice ID: " + invoice.getIdInvoice());
-            System.out.println("Nama: " + invoice.getNama());
-            System.out.println("Alamat: " + invoice.getAlamat());
-            System.out.println("No HP: " + invoice.getNoHp());
+            System.out.println("Nama: " + invoice.getNamaPelanggan());
+            System.out.println("Alamat: " + invoice.getAlamatPelanggan());
+            System.out.println("No HP: " + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
             System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
@@ -38,8 +38,8 @@ public class PegawaiPengeringan extends Pengeringan implements Iperson{
     public void mulaiPengeringan(int idInvoice) {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
-            invoice.setStatusLaundry("Sedang "); // Mengubah status laundry
-            System.out.println("Status laundry untuk Invoice ID " + idInvoice + " telah diubah menjadi 'Sedang di Cuci'.");
+            invoice.setStatusLaundry("Sedang Pengeringan"); // Mengubah status laundry
+            System.out.println("Status laundry untuk Invoice ID " + idInvoice + " telah diubah menjadi 'Sedang Pengeringan'.");
         } else {
             System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
         }
@@ -49,10 +49,12 @@ public class PegawaiPengeringan extends Pengeringan implements Iperson{
     public String getNama() {
         return this.nama;
     }
+
     @Override
     public String getAlamat() {
         return this.alamat;
     }
+
     @Override
     public int getNoHp() {
         return this.noHp;

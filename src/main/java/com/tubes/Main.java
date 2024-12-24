@@ -2,39 +2,53 @@ package com.tubes;
 
 import com.tubes.admin.PegawaiAdmin;
 import com.tubes.pencucian.PegawaiPencucian;
+import com.tubes.pengantaran.PegawaiPengantaran;
+import com.tubes.pengeringan.PegawaiPengeringan;
+import com.tubes.penyetrikaan.PegawaiPenyetrikaan;
 
 public class Main {
     public static void main(String[] args) {
-        PegawaiAdmin pegawaiAdmin = new PegawaiAdmin("John Doe", "Jl. Contoh No. 1", 123456789);
+        PegawaiAdmin pegawaiAdmin = new PegawaiAdmin();
         
-        // Membuat PegawaiPencucian dengan PegawaiAdmin yang sudah ada
-        PegawaiPencucian pegawaiPencucian = new PegawaiPencucian("Alice", "Jl. Cuci No. 1", 987654321, pegawaiAdmin);
+        // Membuat 3 pelanggan dan invoice mereka
+        Pelanggan pelanggan1 = pegawaiAdmin.createInvoice("Jane Smith", "Jl. Contoh No. 2", 987654321, 1, "2024-12-23", "Pesanan Reguler", 10000, false, "dalam antrian");
+        Pelanggan pelanggan2 = pegawaiAdmin.createInvoice("Bob Brown", "Jl. Contoh No. 3", 123123123, 2, "2024-12-24", "Pesanan Ekspres", 15000, false, "dalam antrian");
+        Pelanggan pelanggan3 = pegawaiAdmin.createInvoice("Alice Johnson", "Jl. Contoh No. 4", 456456456, 3, "2024-12-25", "Pesanan Khusus", 20000, false, "dalam antrian");
         
-        // Membuat invoice
-        pegawaiAdmin.createInvoice("Jane Smith", "Jl. Contoh No. 2", 987654321, 1, "2024-12-23", "Pesanan Reguler", 10000, false, "dalam antrian");
+        // Membuat pegawai
+        PegawaiPencucian pegawaiPencucian = new PegawaiPencucian("John Doe", "Jl. Pencucian No. 1", 123456789, pegawaiAdmin);
+        PegawaiPengeringan pegawaiPengeringan = new PegawaiPengeringan("Alice Smith", "Jl. Pengeringan No. 2", 987654321, pegawaiAdmin);
+        PegawaiPenyetrikaan pegawaiPenyetrikaan = new PegawaiPenyetrikaan("Charlie Johnson", "Jl. Penyetrikaan No. 3", 456456456, pegawaiAdmin);
+        PegawaiPengantaran pegawaiPengantaran = new PegawaiPengantaran("Diana Prince", "Jl. Pengantaran No. 4", 789789789, pegawaiAdmin);
         
-        // Mencetak invoice menggunakan PegawaiPencucian
-
-        // pegawaiPencucian
+        // Proses untuk pelanggan 1
+        System.out.println("=== Proses Pelanggan 1 ===");
+        pegawaiPencucian.cetakInvoice(1);
+        pegawaiPengeringan.mulaiPengeringan(1);
+        pelanggan1.cekStatusPencucian(pegawaiAdmin, 1);
+        pelanggan1.bayarTagihan(pegawaiAdmin.getInvoice(1), 10000, "ewallet");
+        pegawaiPengantaran.mulaiPengantaran(1);
+        pegawaiPengantaran.selesaiPengantaran(1);
+        pegawaiPengantaran.cetakInvoice(1);
         
-        // Mengganti status laundry
+        // Proses untuk pelanggan 2
+        System.out.println("\n=== Proses Pelanggan 2 ===");
+        pegawaiPencucian.cetakInvoice(2);
+        pegawaiPengeringan.mulaiPengeringan(2);
+        pelanggan2.cekStatusPencucian(pegawaiAdmin, 2);
+        pelanggan2.bayarTagihan(pegawaiAdmin.getInvoice(2), 15000, "cash");
+        pegawaiPengantaran.mulaiPengantaran(2);
+        pegawaiPengantaran.selesaiPengantaran(2);
+        pegawaiPengantaran.cetakInvoice(2);
         
-        // Menampilkan invoice setelah status diubah
-
-        // Pelanggan
-         // Set invoice ke pelanggan
-        Pelanggan pelanggan = new Pelanggan("Salman", "Jl. Contoh No. 2", 987654321);
-        pelanggan.setInvoice(pegawaiAdmin.getInvoice(1));
-
-        // Cetak informasi tagihan
-        Invoice invoice = pelanggan.getInvoice();
-        System.out.println("Tagihan untuk: " + invoice.getNama());
-        System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
-
-        // Pelanggan membayar tagihan
-        pelanggan.bayarTagihan("ewallet", 10000, 123456789);
-
-        // coba
-        pegawaiAdmin.cetakInvoice(1);
+        // Proses untuk pelanggan 3
+        System.out.println("\n=== Proses Pelanggan 3 ===");
+        pegawaiPencucian.cetakInvoice(3);
+        pegawaiPengeringan.mulaiPengeringan(3);
+        pelanggan3.cekStatusPencucian(pegawaiAdmin, 3);
+        pelanggan3.bayarTagihan(pegawaiAdmin.getInvoice(3), 20000, "qris");
+        pegawaiPengantaran.mulaiPengantaran(3);
+        pegawaiPengantaran.selesaiPengantaran(3);
+        pegawaiPengantaran.cetakInvoice(3);
     }
 }
