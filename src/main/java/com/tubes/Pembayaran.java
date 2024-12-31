@@ -10,12 +10,13 @@ public class Pembayaran implements IPembayaran {
     }
 
     @Override
-    public void bayarEwallet(String nomorHpBisnis, int nominal) {
-        if(nomorHpBisnis == this.nomorBisnis){
+    public void bayarEwallet( String nomorHpBisnis, double nominal) {
+        if(nomorHpBisnis.equals(this.nomorBisnis)){
             if (nominal >= invoice.getBiayaTagihan()) {
                 System.out.println("Pembayaran menggunakan eWallet berhasil.");
                 System.out.println("Nomor HP Bisnis: " + nomorHpBisnis);
                 System.out.println("Nominal: " + nominal);
+                System.out.println("Biaya Laundry : " + invoice.getBiayaTagihan());
                 System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
                 invoice.setStatusLaundry("Laundry telah selesai");
                 System.out.println("Status invoice telah diubah menjadi 'selesai'.");
@@ -28,10 +29,11 @@ public class Pembayaran implements IPembayaran {
     }
 
     @Override
-    public void bayarQris( int nominal) {
+    public void bayarQris( double nominal) {
         if (nominal >= invoice.getBiayaTagihan()) {
             System.out.println("Pembayaran menggunakan QRIS berhasil.");
             System.out.println("Nominal: " + nominal);
+            System.out.println("Biaya Laundry : " + invoice.getBiayaTagihan());
             System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
             invoice.setStatusLaundry("Laundry telah selesai");
             System.out.println("Status invoice telah diubah menjadi 'selesai'.");
@@ -41,10 +43,11 @@ public class Pembayaran implements IPembayaran {
     }
 
     @Override
-    public void bayarCash(int nominal) {
+    public void bayarCash( double nominal) {
         if (nominal >= invoice.getBiayaTagihan()) {
             System.out.println("Pembayaran tunai berhasil.");
             System.out.println("Nominal: " + nominal);
+            System.out.println("Biaya Laundry : " + invoice.getBiayaTagihan());
             System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
             invoice.setStatusLaundry("Laundry telah selesai");
             System.out.println("Status invoice telah diubah menjadi 'selesai'.");

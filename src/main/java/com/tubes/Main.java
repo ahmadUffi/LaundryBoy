@@ -208,25 +208,32 @@ public class Main {
                
                 for (Pelanggan pelanggan : pelangganList) {
                     if (pelanggan.getNama().equalsIgnoreCase(nama)) {
+                        double nominal;
                         System.out.print("Masukkan ID Invoice: ");
                         idInvoice = MissionUtil.getIntInput();
                         if(pelanggan.getLaundry(pegawaiAdmin, idInvoice) == true){
-                            OUTER: 
                             while (true) {
                                 System.out.print("Metode pembayaran (ewallet/cash/qris): ");
                                 String  metodePembayaran = MissionUtil.getStringInput();
                                 switch (metodePembayaran) {
                                     case "ewallet":
                                          System.out.print("Masukkan jumlah pembayaran: ");
-                                         double nominal = MissionUtil.getDoubleInput();
+                                         nominal = MissionUtil.getDoubleInput();
                                          System.out.print("Masukkan nomor Hp bisnis: ");
                                          String noHp = MissionUtil.getStringInput();
-                                         pelanggan.bayarEwallet(invoice, nominal, noHp);
-                                        break;
+                                         pelanggan.bayarEwallet(pegawaiAdmin.getInvoice(idInvoice), nominal, noHp);
+                                         return;
                                     case "cash":
-                                        break;
+                                         System.out.print("Masukkan jumlah pembayaran: ");
+                                         nominal = MissionUtil.getDoubleInput();
+                                         pelanggan.bayarCash(pegawaiAdmin.getInvoice(idInvoice), nominal);
+                                        
+                                        return;
                                     case "qris":
-                                        break OUTER;
+                                        System.out.print("Masukkan jumlah pembayaran: ");
+                                        nominal = MissionUtil.getDoubleInput();
+                                        pelanggan.bayarCash(pegawaiAdmin.getInvoice(idInvoice), nominal);
+                                        return;
                                     default:
                                         System.out.println("Input tidak valid. silahkan masukan 'ewallet', 'cash', 'qris' ");
                                 }

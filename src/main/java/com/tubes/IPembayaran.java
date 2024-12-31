@@ -1,8 +1,8 @@
 package com.tubes;
 
 public interface IPembayaran{
-    public void bayarEwallet(String nomorHpBisnis, int nominal);
-    public void bayarQris(int nominal);
-    public void bayarCash(int nominal);
+    public void bayarEwallet(String nomorHpBisnis, double nominal);
+    public void bayarQris(double nominal);
+    public void bayarCash(double nominal);
 }
 

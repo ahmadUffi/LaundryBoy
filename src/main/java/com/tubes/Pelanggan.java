@@ -25,20 +25,22 @@ public class Pelanggan {
         return noHp;
     }
 
-    public void bayarQris(Invoice invoice, int nominal){
+
+    public void bayarQris(Invoice invoice, double nominal){
         Pembayaran pembayaran = new Pembayaran(invoice);
         pembayaran.bayarQris(nominal);
 
     }
 
-    public void bayarCash(Invoice invoice, int nominal){
+    public void bayarCash(Invoice invoice, double nominal){
         Pembayaran pembayaran = new Pembayaran(invoice);
         pembayaran.bayarCash(nominal);
 
     }
-    public void bayarEwallet(Invoice invoice, int nominal, String noHp){
+    public void bayarEwallet(Invoice invoice, double nominal, String nohp){
+        System.out.println("bayarEwallet");
         Pembayaran pembayaran = new Pembayaran(invoice);
-        pembayaran.bayarEwallet(noHp, nominal);
+        pembayaran.bayarEwallet(nohp, nominal);
     }
 
     // Metode untuk mengecek status pencucian
