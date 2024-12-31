@@ -16,6 +16,7 @@ public class Pembayaran implements IPembayaran {
                 System.out.println("Pembayaran menggunakan eWallet berhasil.");
                 System.out.println("Nomor HP Bisnis: " + nomorHpBisnis);
                 System.out.println("Nominal: " + nominal);
+                System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
                 invoice.setStatusLaundry("Laundry telah selesai");
                 System.out.println("Status invoice telah diubah menjadi 'selesai'.");
             } else {
@@ -31,6 +32,7 @@ public class Pembayaran implements IPembayaran {
         if (nominal >= invoice.getBiayaTagihan()) {
             System.out.println("Pembayaran menggunakan QRIS berhasil.");
             System.out.println("Nominal: " + nominal);
+            System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
             invoice.setStatusLaundry("Laundry telah selesai");
             System.out.println("Status invoice telah diubah menjadi 'selesai'.");
         } else {
@@ -43,6 +45,7 @@ public class Pembayaran implements IPembayaran {
         if (nominal >= invoice.getBiayaTagihan()) {
             System.out.println("Pembayaran tunai berhasil.");
             System.out.println("Nominal: " + nominal);
+            System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
             invoice.setStatusLaundry("Laundry telah selesai");
             System.out.println("Status invoice telah diubah menjadi 'selesai'.");
         } else {

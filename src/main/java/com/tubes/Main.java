@@ -46,7 +46,7 @@ public class Main {
     }
 
     public static void printMainMenu(){
-        System.out.println("================================================================");
+        System.out.println("========================== Login Sebagai ======================================");
         System.out.println("1. Kariyawan ");
         System.out.println("2. Pelanggan");
         System.out.println("3. Keluar Program");
@@ -54,7 +54,7 @@ public class Main {
     }
 
     public static void printPekerjaanPegawai(){
-        System.out.println("================================================================");
+        System.out.println("================================ Pilihan Menu ================================");
         System.out.println("1. Buat Invoice");
         System.out.println("2. Mulai Pencucian");
         System.out.println("3. Selesai Pencucian");
@@ -205,23 +205,47 @@ public class Main {
             case 2:
                 System.out.print("Masukkan Nama Pelanggan: ");
                 nama = MissionUtil.getStringInput();
-                System.out.print("Masukkan ID Invoice: ");
-                idInvoice = MissionUtil.getIntInput();
+               
                 for (Pelanggan pelanggan : pelangganList) {
                     if (pelanggan.getNama().equalsIgnoreCase(nama)) {
-                        System.out.print("Masukkan jumlah pembayaran: ");
-                        double jumlahBayar = MissionUtil.getDoubleInput();
-                        System.out.print("Metode pembayaran (ewallet/cash/qris): ");
-                        String metodePembayaran = MissionUtil.getStringInput();
-                        // Implementasi pembayaran
-                        // Misalnya: pegawaiAdmin.bayarTagihan(idInvoice, jumlahBayar, metodePembayaran);
-                        System.out.println("Pembayaran berhasil.");
-                        break;
+                        System.out.print("Masukkan ID Invoice: ");
+                        idInvoice = MissionUtil.getIntInput();
+                        if(pelanggan.getLaundry(pegawaiAdmin, idInvoice) == true){
+                            OUTER: 
+                            while (true) {
+                                System.out.print("Metode pembayaran (ewallet/cash/qris): ");
+                                String  metodePembayaran = MissionUtil.getStringInput();
+                                switch (metodePembayaran) {
+                                    case "ewallet":
+                                         System.out.print("Masukkan jumlah pembayaran: ");
+                                         double nominal = MissionUtil.getDoubleInput();
+                                         System.out.print("Masukkan nomor Hp bisnis: ");
+                                         String noHp = MissionUtil.getStringInput();
+                                         pelanggan.bayarEwallet(invoice, nominal, noHp);
+                                        break;
+                                    case "cash":
+                                        break;
+                                    case "qris":
+                                        break OUTER;
+                                    default:
+                                        System.out.println("Input tidak valid. silahkan masukan 'ewallet', 'cash', 'qris' ");
+                                }
+                            }
+                        }
+                    
                     }
-                }
+                    
+                    // Implementasi pembayaran
+                    // Misalnya: pegawaiAdmin.bayarTagihan(idInvoice, jumlahBayar, metodePembayaran);
+                    System.out.println("Pembayaran berhasil.");
+                    break;
+                    }
+                System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
                 break;
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+            }
+              
         }
     }
-}
+
