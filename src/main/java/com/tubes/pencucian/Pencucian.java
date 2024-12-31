@@ -24,7 +24,7 @@ public class Pencucian {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
             invoice.setStatusLaundry("Antrian Pengeringan"); // Mengubah status laundry
-            System.out.println("Status laundry untuk Invoice ID " + idInvoice + "'Sedang di Cuci'.");
+            System.out.println("Status laundry untuk Invoice ID " + idInvoice + "'Selesai di Cuci'.");
         } else {
             System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
         }

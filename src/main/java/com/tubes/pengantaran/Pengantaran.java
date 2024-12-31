@@ -15,7 +15,7 @@ public class Pengantaran {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
             invoice.setStatusLaundry("Sedang di Antar"); // Mengubah status laundry
-            System.out.println("Status laundry untuk Invoice ID " + idInvoice + " telah diubah menjadi 'Sedang di Antar'.");
+            System.out.println("Status laundry untuk Invoice ID " + idInvoice + "Sedang di Antar");
         } else {
             System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
         }
@@ -25,8 +25,8 @@ public class Pengantaran {
     public void selesaiPengantaran(int idInvoice) {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
-            invoice.setStatusLaundry("Laundry telah sampai di tujuan"); // Mengubah status laundry
-            System.out.println("Status laundry untuk Invoice ID " + idInvoice + " telah diubah menjadi 'Laundry telah selesai'.");
+            invoice.setStatusLaundry("Sedang di Antar"); // Mengubah status laundry
+            System.out.println("Status laundry untuk Invoice ID " + idInvoice + "Menunggu Pembayaran");
         } else {
             System.out.println("Invoice tidak ditemukan untuk ID: " + idInvoice);
         }

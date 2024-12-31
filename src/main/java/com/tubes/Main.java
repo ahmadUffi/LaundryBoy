@@ -1,7 +1,6 @@
 package com.tubes;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.tubes.admin.PegawaiAdmin;
 import com.tubes.pencucian.PegawaiPencucian;
@@ -14,7 +13,6 @@ public class Main {
     public static ArrayList<Pelanggan> pelangganList = new ArrayList<>();
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         PegawaiAdmin pegawaiAdmin = new PegawaiAdmin();
         
         // Membuat pegawai
@@ -27,22 +25,19 @@ public class Main {
 
         do { 
             printMainMenu();
-            pilihan = scanner.nextInt();
-            scanner.nextLine(); // Clear the buffer
+            pilihan = MissionUtil.getIntInput();
 
             switch (pilihan) {
                 case 1: // Kariyawan
                     printPekerjaanPegawai();
-                    pilihan = scanner.nextInt();
-                    scanner.nextLine(); // Clear the buffer
-                    handlePegawaiOptions(pilihan, pegawaiAdmin, pegawaiPencucian, pegawaiPengeringan, pegawaiPenyetrikaan, pegawaiPengantaran, scanner);
+                    pilihan = MissionUtil.getIntInput();
+                    handlePegawaiOptions(pilihan, pegawaiAdmin, pegawaiPencucian, pegawaiPengeringan, pegawaiPenyetrikaan, pegawaiPengantaran);
                     break;
                 case 2: // Pelanggan
-                    handlePelangganOptions(scanner, pegawaiAdmin);
+                    handlePelangganOptions(pegawaiAdmin);
                     break;
                 case 3: // Keluar
                     System.out.println("Keluar dari program.");
-                    scanner.close();
                     return;
                 default:
                     System.out.println("Pilihan tidak valid. Silakan coba lagi.");
@@ -76,136 +71,155 @@ public class Main {
         System.out.print("Pilih opsi: ");
     }
 
-    public static void handlePegawaiOptions(int pilihan, PegawaiAdmin pegawaiAdmin, PegawaiPencucian pegawaiPencucian, PegawaiPengeringan pegawaiPengeringan, PegawaiPenyetrikaan pegawaiPenyetrikaan, PegawaiPengantaran pegawaiPengantaran, Scanner scanner) {
+    public static void handlePegawaiOptions(int pilihan, PegawaiAdmin pegawaiAdmin, PegawaiPencucian pegawaiPencucian, PegawaiPengeringan pegawaiPengeringan, PegawaiPenyetrikaan pegawaiPenyetrikaan, PegawaiPengantaran pegawaiPengantaran) {
         int idInvoice;
         switch (pilihan) {
-            case 1 -> {
-                System.out.println("=== Buat Invoice ===");
-                System.out.print("Nama Pelanggan: ");
-                String namaPelanggan = scanner.nextLine();
-                System.out.print("Alamat Pelanggan: ");
-                String alamatPelanggan = scanner.nextLine();
-                System.out.print("No HP Pelanggan: ");
-                int noHpPelanggan = scanner.nextInt();
-                System.out.print("ID Invoice: ");
-                idInvoice = scanner.nextInt();
-                System.out.print("Tanggal (YYYY-MM-DD): ");
-                String tanggal = scanner.next();
-                System.out.print("Tipe Pesanan: ");
-                String tipePesanan = scanner.next();
-                System.out.print("Biaya Tagihan: ");
-                double beratLaundry = scanner.nextDouble();
-                System.out.print("Status Pembayaran (true/false): ");
-                boolean statusPembayaran = scanner.nextBoolean();
-                scanner.nextLine(); // Clear the buffer
-                // Membuat invoice dan menambahkannya ke pelangganList
-                Pelanggan pelanggan = pegawaiAdmin.createInvoice(namaPelanggan, alamatPelanggan, noHpPelanggan, idInvoice, tanggal, tipePesanan, beratLaundry, statusPembayaran, "dalam antrian");
-                pelangganList.add(pelanggan);
-                System.out.println("Invoice berhasil dibuat.");
+            case 1:
+            System.out.println("=== Buat Invoice ===");
+            System.out.print("Nama Pelanggan: ");
+            String namaPelanggan = MissionUtil.getStringInput();
+            System.out.print("Alamat Pelanggan: ");
+            String alamatPelanggan = MissionUtil.getStringInput();
+            System.out.print("No HP Pelanggan: ");
+            int noHpPelanggan = MissionUtil.getIntInput();
+            System.out.print("ID Invoice: ");
+            idInvoice = MissionUtil.getIntInput();
+            System.out.print("Tanggal (YYYY-MM-DD): ");
+            String tanggal = MissionUtil.getStringInput();
+
+            // Input validation for Tipe Pesanan
+            String tipePesanan;
+            while (true) {
+                System.out.print("Tipe Pesanan (ekspress/reguler/instan): ");
+                tipePesanan = MissionUtil.getStringInput().toLowerCase(); // Convert to lowercase for easier comparison
+                if (tipePesanan.equals("ekspress") || tipePesanan.equals("reguler") || tipePesanan.equals("instan")) {
+                    break; // Valid input, exit the loop
+                } else {
+                    System.out.println("Input tidak valid. Silakan masukkan 'ekspress', 'reguler', atau 'instan'.");
+                }
             }
-            case 2 -> {
+
+            System.out.print("Berat Laundry: ");
+            double biayaTagihan = MissionUtil.getDoubleInput();
+            System.out.print("Status Pembayaran (true/false): ");
+            boolean statusPembayaran = MissionUtil.getIntInput() == 1; // Menganggap 1 sebagai true, 0 sebagai false
+
+            Pelanggan pelanggan = pegawaiAdmin.createInvoice(namaPelanggan, alamatPelanggan, noHpPelanggan, idInvoice, tanggal, tipePesanan, biayaTagihan, statusPembayaran, "dalam antrian");
+            pelangganList.add(pelanggan);
+            System.out.println("Invoice berhasil dibuat.");
+            break;
+            case 2:
                 System.out.println("=== Mulai Pencucian ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPencucian.mulaiCuci(idInvoice);
-            }
-            case 3 -> {
+                break;
+            case 3:
                 System.out.println("=== Selesai Pencucian ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPencucian.SelesaiCuci(idInvoice);
-            }
-            case 4 -> {
+                break;
+            case 4:
                 System.out.println("=== Mulai Pengeringan ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPengeringan.mulaiPengeringan(idInvoice);
-            }
-            case 5 -> {
+                break;
+            case 5:
                 System.out.println("=== Selesai Pengeringan ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPengeringan.SelesaiPengeringan(idInvoice);
-            }
-            case 6 -> {
+                break;
+            case 6:
                 System.out.println("=== Mulai Penyetrikaan ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPenyetrikaan.mulaiSetrika(idInvoice);
-            }
-            case 7 -> {
+                break;
+            case 7:
                 System.out.println("=== Selesai Penyetrikaan ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPenyetrikaan.SelesaiSetrika(idInvoice);
-            }
-            case 8 -> {
+                break;
+            case 8:
                 System.out.println("=== Mulai Pengantaran ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPengantaran.mulaiPengantaran(idInvoice);
-            }
-            case 9 -> {
+                break;
+            case 9:
                 System.out.println("=== Selesai Pengantaran ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiPengantaran.selesaiPengantaran(idInvoice);
-            }
-            case 10 -> {
+                break;
+            case 10:
                 System.out.println("=== Cetak Invoice ===");
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
+                idInvoice = MissionUtil.getIntInput();
                 pegawaiAdmin.cetakInvoice(idInvoice);
-            }
-            case 11 -> {
+                break;
+            case 11:
                 System.out.println("=== Cetak Semua Invoice ===");
                 pegawaiAdmin.cekSemuaStatusLaundry();
-            }
-            case 12 -> {
+                break;
+            case 12:
                 System.out.println("=== Report Keuangan ===");
                 pegawaiAdmin.reportKeuangan();
-            }
-            case 13 -> System.out.println("Kembali ke menu utama.");
-            default -> System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+                break;
+            case 13:
+                System.out.println("Kembali ke menu utama.");
+                break;
+            default:
+                System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }
     }
 
-    public static void handlePelangganOptions(Scanner scanner, PegawaiAdmin pegawaiAdmin) {
+    public static void handlePelangganOptions(PegawaiAdmin pegawaiAdmin) {
         System.out.println("=== Menu Pelanggan ===");
         System.out.println("1. Lihat Status Laundry");
         System.out.println("2. Bayar Laundry");
         System.out.print("Pilih opsi: ");
-        int pilihan = scanner.nextInt();
+        int pilihan = MissionUtil.getIntInput();
         String nama;
         int idInvoice;
-        scanner.nextLine(); // Clear the buffer
 
         switch (pilihan) {
             case 1:
                 System.out.print("Masukkan Nama Pelanggan: ");
                 nama = MissionUtil.getStringInput();
                 System.out.print("Masukkan ID Invoice: ");
-                idInvoice = scanner.nextInt();
-                for(Pelanggan pelanggan : pelangganList){
-                    if(pelanggan.getNama().equalsIgnoreCase(nama)){
+                idInvoice = MissionUtil.getIntInput();
+                for (Pelanggan pelanggan : pelangganList) {
+                    if (pelanggan.getNama().equalsIgnoreCase(nama)) {
                         System.out.print("Status Laundry: ");
-                        pelanggan.cekStatusPencucian(pegawaiAdmin, idInvoice);
+                        pelanggan.cekStatusPencucian(pegawaiAdmin, idInvoice); 
+                        break;
+                    }
+                }
+                System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
+                break;
+            case 2:
+                System.out.print("Masukkan Nama Pelanggan: ");
+                nama = MissionUtil.getStringInput();
+                System.out.print("Masukkan ID Invoice: ");
+                idInvoice = MissionUtil.getIntInput();
+                for (Pelanggan pelanggan : pelangganList) {
+                    if (pelanggan.getNama().equalsIgnoreCase(nama)) {
+                        System.out.print("Masukkan jumlah pembayaran: ");
+                        double jumlahBayar = MissionUtil.getDoubleInput();
+                        System.out.print("Metode pembayaran (ewallet/cash/qris): ");
+                        String metodePembayaran = MissionUtil.getStringInput();
+                        // Implementasi pembayaran
+                        // Misalnya: pegawaiAdmin.bayarTagihan(idInvoice, jumlahBayar, metodePembayaran);
+                        System.out.println("Pembayaran berhasil.");
                         break;
                     }
                 }
                 break;
-            case 2:
-            System.out.print("Masukkan Nama Pelanggan: ");
-            nama = MissionUtil.getStringInput();
-            System.out.print("Masukkan ID Invoice: ");
-            idInvoice = scanner.nextInt();
-            for(Pelanggan pelanggan : pelangganList){
-                if(pelanggan.getNama().equalsIgnoreCase(nama)){
-                    System.out.print("Status Laundry: ");
-                    pelanggan.cekStatusPencucian(pegawaiAdmin, idInvoice);
-                    break;
-                }
-            }
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }

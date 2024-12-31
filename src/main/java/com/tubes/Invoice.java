@@ -8,7 +8,6 @@ public class Invoice {
     private String tanggal;
     private String tipePesanan;
     private double biayaTagihan;
-<<<<<<< HEAD
     private double beratLaundry;
     private boolean statusPembayaran;
     private String statusLaundry;
@@ -17,19 +16,12 @@ public class Invoice {
     private double reguler = 4000;
 
     public Invoice(String namaPelanggan, String alamatPelanggan, int noHpPelanggan, int idInvoice, String tanggal, String tipePesanan, double beratLaundry, boolean statusPembayaran, String statusLaundry) {
-=======
-    private boolean statusPembayaran;
-    private String statusLaundry;
-
-    public Invoice(String namaPelanggan, String alamatPelanggan, int noHpPelanggan, int idInvoice, String tanggal, String tipePesanan, double biayaTagihan, boolean statusPembayaran, String statusLaundry) {
->>>>>>> c5455a806402356649f0c20e93671706ebbb857e
         this.namaPelanggan = namaPelanggan;
         this.alamatPelanggan = alamatPelanggan;
         this.noHpPelanggan = noHpPelanggan;
         this.idInvoice = idInvoice;
         this.tanggal = tanggal;
         this.tipePesanan = tipePesanan;
-<<<<<<< HEAD
         this.beratLaundry = beratLaundry;
         this.statusPembayaran = statusPembayaran;
         this.statusLaundry = statusLaundry;
@@ -38,13 +30,8 @@ public class Invoice {
         }else if(this.tipePesanan.equals("ekspress")){
             this.biayaTagihan =  this.ekspress * beratLaundry;
         }else if(this.tipePesanan.equals("reguler")){
-            this.biayaTagihan = this.ekspress * beratLaundry;
+            this.biayaTagihan = this.reguler * beratLaundry;
         }
-=======
-        this.biayaTagihan = biayaTagihan;
-        this.statusPembayaran = statusPembayaran;
-        this.statusLaundry = statusLaundry;
->>>>>>> c5455a806402356649f0c20e93671706ebbb857e
     }
 
     public void setStatusLaundry(String statusLaundry) {
@@ -74,6 +61,12 @@ public class Invoice {
     public String getStatusLaundry() {
         return statusLaundry;
     }
+
+    public double  getBeratLaundry() {
+        return beratLaundry;
+    }
+
+    
 
     public void cetakTagihan() {
         System.out.println("Tagihan untuk " + namaPelanggan + ": " + biayaTagihan);

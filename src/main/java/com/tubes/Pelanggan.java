@@ -27,17 +27,13 @@ public class Pelanggan {
 
     public void bayarTagihan(Invoice invoice, int nominal, String metodePembayaran) {
         Pembayaran pembayaran = new Pembayaran(invoice); // Membuat objek Pembayaran dengan invoice yang akan dibayar
-
-<<<<<<< HEAD
         switch (metodePembayaran.toLowerCase()) {   
-=======
-        switch (metodePembayaran.toLowerCase()) {
->>>>>>> c5455a806402356649f0c20e93671706ebbb857e
+
             case "ewallet":
                 pembayaran.bayarEwallet(noHp, nominal);
                 break;
             case "qris":
-                pembayaran.bayarQris(noHp, nominal);
+                pembayaran.bayarQris( nominal);
                 break;
             case "cash":
                 pembayaran.bayarCash(nominal);

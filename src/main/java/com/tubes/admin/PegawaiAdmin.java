@@ -35,6 +35,7 @@ public class PegawaiAdmin {
             System.out.println("No HP: " + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
+            System.out.println("Berat Laundry: " + invoice.getBeratLaundry());
             System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
             System.out.println("Status Pembayaran: " + (invoice.getStatusPembayaran() ? "Sudah Dibayar" : "Belum Dibayar"));
             System.out.println("Status Laundry: " + invoice.getStatusLaundry());
@@ -51,7 +52,16 @@ public class PegawaiAdmin {
     public void cekSemuaStatusLaundry() {
         System.out.println("=== Status Laundry Semua Invoice ===");
         for (Invoice invoice : invoices.values()) {
-            System.out.println("Invoice ID: " + invoice.getIdInvoice() + ", Status Laundry: " + invoice.getStatusLaundry());
+            System.out.println("Invoice ID: " + invoice.getIdInvoice());
+            System.out.println("Nama: " + invoice.getNamaPelanggan());
+            System.out.println("Alamat: " + invoice.getAlamatPelanggan());
+            System.out.println("No HP: " + invoice.getNoHpPelanggan());
+            System.out.println("Tanggal: " + invoice.getTanggal());
+            System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
+            System.out.println("Berat Laundry: " + invoice.getBeratLaundry());
+            System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
+            System.out.println("Status Pembayaran: " + (invoice.getStatusPembayaran() ? "Sudah Dibayar" : "Belum Dibayar"));
+            System.out.println("Status Laundry: " + invoice.getStatusLaundry());
         }
     }
 
