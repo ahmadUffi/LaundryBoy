@@ -3,6 +3,7 @@ package com.tubes.admin;
 import java.util.HashMap;
 
 import com.tubes.Invoice;
+import com.tubes.MissionUtil;
 import com.tubes.Pelanggan;
 
 public class PegawaiAdmin {
@@ -32,11 +33,11 @@ public class PegawaiAdmin {
             System.out.println("Invoice ID: " + invoice.getIdInvoice());
             System.out.println("Nama: " + invoice.getNamaPelanggan());
             System.out.println("Alamat: " + invoice.getAlamatPelanggan());
-            System.out.println("No HP: " + invoice.getNoHpPelanggan());
+            System.out.println("No HP: 0" + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
             System.out.println("Berat Laundry: " + invoice.getBeratLaundry());
-            System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
+            System.out.println("Biaya Tagihan: " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
             System.out.println("Status Pembayaran: " + (invoice.getStatusPembayaran() ? "Sudah Dibayar" : "Belum Dibayar"));
             System.out.println("Status Laundry: " + invoice.getStatusLaundry());
         } else {
@@ -48,18 +49,18 @@ public class PegawaiAdmin {
         return invoices.get(idInvoice);
     }
 
-    // Fungsi untuk cek semua status laundry
+    // Fungsi untuk cek semua status laundry ||  fungsi invoice.nama, alamat, noHp ditambahin Pelanggan. contoh getNamaPelanggan()
     public void cekSemuaStatusLaundry() {
         System.out.println("=== Status Laundry Semua Invoice ===");
         for (Invoice invoice : invoices.values()) {
             System.out.println("Invoice ID: " + invoice.getIdInvoice());
             System.out.println("Nama: " + invoice.getNamaPelanggan());
             System.out.println("Alamat: " + invoice.getAlamatPelanggan());
-            System.out.println("No HP: " + invoice.getNoHpPelanggan());
+            System.out.println("No HP: 0" + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
             System.out.println("Berat Laundry: " + invoice.getBeratLaundry());
-            System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
+            System.out.println("Biaya Tagihan: " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
             System.out.println("Status Pembayaran: " + (invoice.getStatusPembayaran() ? "Sudah Dibayar" : "Belum Dibayar"));
             System.out.println("Status Laundry: " + invoice.getStatusLaundry());
         }

@@ -1,6 +1,7 @@
 package com.tubes.pengantaran;
 
 import com.tubes.Invoice;
+import com.tubes.MissionUtil;
 import com.tubes.admin.PegawaiAdmin;
 
 public class Pengantaran {
@@ -32,7 +33,7 @@ public class Pengantaran {
         }
     }
 
-    // Metode untuk mencetak invoice
+    // Metode untuk mencetak invoice ||  fungsi invoice.nama, alamat, noHp ditambahin Pelanggan. contoh getNamaPelanggan()
     public void cetakInvoice(int idInvoice) {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
@@ -42,7 +43,7 @@ public class Pengantaran {
             System.out.println("No HP: " + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
-            System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
+            System.out.println("Biaya Tagihan: " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
             System.out.println("Status Pembayaran: " + (invoice.getStatusPembayaran() ? "Sudah Dibayar" : "Belum Dibayar"));
             System.out.println("Status Laundry: " + invoice.getStatusLaundry());
         } else {

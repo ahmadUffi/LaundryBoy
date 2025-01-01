@@ -1,5 +1,6 @@
 package com.tubes.penyetrikaan;
 import com.tubes.Invoice;
+import com.tubes.MissionUtil;
 import com.tubes.admin.PegawaiAdmin;
 
 public class Penyetrikaan {
@@ -30,17 +31,17 @@ public class Penyetrikaan {
         }
     }
 
-    // Metode untuk mencetak invoice
+    // Metode untuk mencetak invoice ||  fungsi invoice.nama, alamat, noHp ditambahin Pelanggan. contoh getNamaPelanggan()
     public void cetakInvoice(int idInvoice) {
         Invoice invoice = pegawaiAdmin.getInvoice(idInvoice);
         if (invoice != null) {
             System.out.println("Invoice ID: " + invoice.getIdInvoice());
-            System.out.println("Nama: " + invoice.getNama());
-            System.out.println("Alamat: " + invoice.getAlamat());
-            System.out.println("No HP: " + invoice.getNoHp());
+            System.out.println("Nama: " + invoice.getNamaPelanggan());
+            System.out.println("Alamat: " + invoice.getAlamatPelanggan());
+            System.out.println("No HP: " + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
-            System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
+            System.out.println("Biaya Tagihan: " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
             System.out.println("Status Pembayaran: " + (invoice.getStatusPembayaran() ? "Sudah Dibayar" : "Belum Dibayar"));
             System.out.println("Status Laundry: " + invoice.getStatusLaundry());
         } else {
