@@ -38,6 +38,7 @@ public class Pelanggan {
 
     }
     public void bayarEwallet(Invoice invoice, double nominal, String nohp){
+    // public void bayarEwallet(Invoice invoice, double nominal, String nohp){
         System.out.println("bayarEwallet");
         Pembayaran pembayaran = new Pembayaran(invoice);
         pembayaran.bayarEwallet(nohp, nominal);

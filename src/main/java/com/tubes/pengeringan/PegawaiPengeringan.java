@@ -2,6 +2,7 @@ package com.tubes.pengeringan;
 
 import com.tubes.Invoice;
 import com.tubes.Iperson;
+import com.tubes.MissionUtil;
 import com.tubes.admin.PegawaiAdmin;
 
 public class PegawaiPengeringan extends Pengeringan implements Iperson {
@@ -27,7 +28,7 @@ public class PegawaiPengeringan extends Pengeringan implements Iperson {
             System.out.println("No HP: " + invoice.getNoHpPelanggan());
             System.out.println("Tanggal: " + invoice.getTanggal());
             System.out.println("Tipe Pesanan: " + invoice.getTipePesanan());
-            System.out.println("Biaya Tagihan: " + invoice.getBiayaTagihan());
+            System.out.println("Biaya Tagihan: " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
             System.out.println("Status Pembayaran: " + (invoice.getStatusPembayaran() ? "Sudah Dibayar" : "Belum Dibayar"));
             System.out.println("Status Laundry: " + invoice.getStatusLaundry());
         } else {

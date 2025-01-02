@@ -198,9 +198,11 @@ public class Main {
                         System.out.print("Status Laundry: ");
                         pelanggan.cekStatusPencucian(pegawaiAdmin, idInvoice); 
                         break;
+                    } else {
+                        System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
                     }
                 }
-                System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
+                // System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
                 break;
             case 2:
                 System.out.print("Masukkan Nama Pelanggan: ");
@@ -219,8 +221,9 @@ public class Main {
                                     case "ewallet":
                                          System.out.print("Masukkan jumlah pembayaran: ");
                                          nominal = MissionUtil.getDoubleInput();
-                                         System.out.print("Masukkan nomor Hp bisnis: ");
-                                         String noHp = MissionUtil.getStringInput();
+                                         System.out.print("Salin Nomor HP Bisnis ini (082234709831): ");
+                                         String noHp = MissionUtil.getStringNoHpBisnisInput();
+                                        //  String noHp = MissionUtil.getStringInput();
                                          pelanggan.bayarEwallet(pegawaiAdmin.getInvoice(idInvoice), nominal, noHp);
                                          return;
                                     case "cash":
@@ -232,7 +235,7 @@ public class Main {
                                     case "qris":
                                         System.out.print("Masukkan jumlah pembayaran: ");
                                         nominal = MissionUtil.getDoubleInput();
-                                        pelanggan.bayarCash(pegawaiAdmin.getInvoice(idInvoice), nominal);
+                                        pelanggan.bayarQris(pegawaiAdmin.getInvoice(idInvoice), nominal);
                                         return;
                                     default:
                                         System.out.println("Input tidak valid. silahkan masukan 'ewallet', 'cash', 'qris' ");

@@ -14,9 +14,9 @@ public class Pembayaran implements IPembayaran {
         if(nomorHpBisnis.equals(this.nomorBisnis)){
             if (nominal >= invoice.getBiayaTagihan()) {
                 System.out.println("Pembayaran menggunakan eWallet berhasil.");
-                System.out.println("Nomor HP Bisnis: " + nomorHpBisnis);
+                System.out.println("Nomor HP Bisnis : " + nomorHpBisnis);
                 System.out.println("Nominal: " + nominal);
-                System.out.println("Biaya Laundry : " + invoice.getBiayaTagihan());
+                System.out.println("Biaya Laundry : " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
                 System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
                 invoice.setStatusLaundry("Laundry telah selesai");
                 System.out.println("Status invoice telah diubah menjadi 'selesai'.");
@@ -24,7 +24,7 @@ public class Pembayaran implements IPembayaran {
                 System.out.println("Pembayaran gagal. Nominal tidak cukup.");
             }
         }else{
-            System.out.println("Nomor HP Bisnis: " + this.nomorBisnis);
+            System.out.println("Salin Nomor HP Bisnis ini untuk bayar: " + this.nomorBisnis);
         }
     }
 
@@ -32,8 +32,8 @@ public class Pembayaran implements IPembayaran {
     public void bayarQris( double nominal) {
         if (nominal >= invoice.getBiayaTagihan()) {
             System.out.println("Pembayaran menggunakan QRIS berhasil.");
-            System.out.println("Nominal: " + nominal);
-            System.out.println("Biaya Laundry : " + invoice.getBiayaTagihan());
+            System.out.println("Nominal: " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
+            System.out.println("Biaya Laundry : " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
             System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
             invoice.setStatusLaundry("Laundry telah selesai");
             System.out.println("Status invoice telah diubah menjadi 'selesai'.");
@@ -47,7 +47,7 @@ public class Pembayaran implements IPembayaran {
         if (nominal >= invoice.getBiayaTagihan()) {
             System.out.println("Pembayaran tunai berhasil.");
             System.out.println("Nominal: " + nominal);
-            System.out.println("Biaya Laundry : " + invoice.getBiayaTagihan());
+            System.out.println("Biaya Laundry : " + MissionUtil.moneyFormat(invoice.getBiayaTagihan()));
             System.out.println("kembalian Rp." + (nominal - invoice.getBiayaTagihan()));
             invoice.setStatusLaundry("Laundry telah selesai");
             System.out.println("Status invoice telah diubah menjadi 'selesai'.");

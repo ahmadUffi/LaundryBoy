@@ -2,11 +2,13 @@ package com.tubes;
 
 import java.text.NumberFormat;
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class MissionUtil {
     private static final Scanner scanner = new Scanner(System.in); // Satu instance Scanner
 
+    // ==== Fungsi intInput baru ====
     public static int getIntInput() {
         while (true) {
             try {
@@ -20,6 +22,22 @@ public class MissionUtil {
         }
     }
 
+    // public static int getIntInput() {
+    //     while (true) {
+    //         String input = scanner.nextLine().trim(); // Membaca input sebagai string
+    //         try {
+    //             // Memastikan input adalah angka
+    //             if (input.matches("\\d+")) { // Hanya menerima digit
+    //                 return Integer.parseInt(input);
+    //             } else {
+    //                 System.out.println("Input tidak valid. Silakan masukkan angka.");
+    //             }
+    //         } catch (NumberFormatException e) {
+    //             System.out.println("Input tidak valid. Silakan masukkan angka.");
+    //         }
+    //     }
+    // }
+    
     public static double getDoubleInput() {
         while (true) {
             try {
@@ -33,13 +51,37 @@ public class MissionUtil {
         }
     }
 
+    // ==== Fungsi StringInput baru ====
     public static String getStringInput() {
-        return scanner.nextLine();
+        while (true) {
+            String input = scanner.nextLine().trim(); // Menghapus spasi di awal dan akhir
+            if (input.isEmpty()) { // Mengecek apakah input kosong
+                System.out.println("Input tidak boleh kosong. Silakan masukkan teks yang valid.");
+            } else if (input.matches("\\d+")) { // Mengecek apakah input hanya berupa angka
+                System.out.println("Input tidak valid. Silakan masukkan teks tanpa angka.");
+            } else {
+                return input;
+            }
+        }
+    }
+    
+    // public static String getStringInput() {
+    //     return scanner.nextLine();
+    // }
+
+    // public static String moneyFormat(double price) {
+    //     return NumberFormat.getInstance().format(price);
+    // }
+
+    // ==== Fungsi moneyFormat baru ====
+    public static String moneyFormat(double price) {
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        String formattedPrice = currencyFormatter.format(price);
+        
+        return formattedPrice.replace("Rp", "IDR ").replace(",00", ".00");
     }
 
-    public static String moneyFormat(double price) {
-        return NumberFormat.getInstance().format(price);
-    }
+    
 
     // Optional: Method to clear the console (not universally supported)
     public static void clearConsole() {
@@ -48,4 +90,24 @@ public class MissionUtil {
             System.out.println();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public static String getStringNoHpBisnisInput() {
+    return scanner.nextLine();
+}
 }
