@@ -189,6 +189,7 @@ public class Main {
 
         switch (pilihan) {
             case 1:
+                // boolean pelangganDitemukan = false;
                 System.out.print("Masukkan Nama Pelanggan: ");
                 nama = MissionUtil.getStringInput();
                 System.out.print("Masukkan ID Invoice: ");
@@ -197,14 +198,15 @@ public class Main {
                     if (pelanggan.getNama().equalsIgnoreCase(nama)) {
                         System.out.print("Status Laundry: ");
                         pelanggan.cekStatusPencucian(pegawaiAdmin, idInvoice); 
-                        break;
-                    } else {
-                        System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
-                    }
+                        return;
+                    } 
+                    // else {
+                    //     System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
+                    // }
                 }
-                // System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
+                System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
                 break;
-            case 2:
+                case 2:
                 System.out.print("Masukkan Nama Pelanggan: ");
                 nama = MissionUtil.getStringInput();
                
@@ -213,43 +215,39 @@ public class Main {
                         double nominal;
                         System.out.print("Masukkan ID Invoice: ");
                         idInvoice = MissionUtil.getIntInput();
-                        if(pelanggan.getLaundry(pegawaiAdmin, idInvoice) == true){
+                        if (pelanggan.getLaundry(pegawaiAdmin, idInvoice) == true) {
                             while (true) {
                                 System.out.print("Metode pembayaran (ewallet/cash/qris): ");
-                                String  metodePembayaran = MissionUtil.getStringInput();
+                                String metodePembayaran = MissionUtil.getStringInput();
                                 switch (metodePembayaran) {
                                     case "ewallet":
-                                         System.out.print("Masukkan jumlah pembayaran: ");
-                                         nominal = MissionUtil.getDoubleInput();
-                                         System.out.print("Salin Nomor HP Bisnis ini (082234709831): ");
-                                         String noHp = MissionUtil.getStringNoHpBisnisInput();
-                                        //  String noHp = MissionUtil.getStringInput();
-                                         pelanggan.bayarEwallet(pegawaiAdmin.getInvoice(idInvoice), nominal, noHp);
-                                         return;
+                                        System.out.print("Masukkan jumlah pembayaran: ");
+                                        nominal = MissionUtil.getDoubleInput();
+                                        System.out.print("Salin Nomor HP Bisnis ini (082234709831): ");
+                                        String noHp = MissionUtil.getStringNoHpBisnisInput();
+                                        pelanggan.bayarEwallet(pegawaiAdmin.getInvoice(idInvoice), nominal, noHp);
+                                        break; // Exit the while loop after successful payment
                                     case "cash":
-                                         System.out.print("Masukkan jumlah pembayaran: ");
-                                         nominal = MissionUtil.getDoubleInput();
-                                         pelanggan.bayarCash(pegawaiAdmin.getInvoice(idInvoice), nominal);
-                                        
-                                        return;
+                                        System.out.print("Masukkan jumlah pembayaran: ");
+                                        nominal = MissionUtil.getDoubleInput();
+                                        pelanggan.bayarCash(pegawaiAdmin.getInvoice(idInvoice), nominal);
+                                        break; // Exit the while loop after successful payment
                                     case "qris":
                                         System.out.print("Masukkan jumlah pembayaran: ");
                                         nominal = MissionUtil.getDoubleInput();
                                         pelanggan.bayarQris(pegawaiAdmin.getInvoice(idInvoice), nominal);
-                                        return;
+                                        break; // Exit the while loop after successful payment
                                     default:
                                         System.out.println("Input tidak valid. silahkan masukan 'ewallet', 'cash', 'qris' ");
+                                        continue; // Continue the while loop for valid input
                                 }
+                                break; // Exit the while loop after successful payment
                             }
                         }
-                    
+                        System.out.println("Pembayaran berhasil.");
                     }
-                    
-                    // Implementasi pembayaran
-                    // Misalnya: pegawaiAdmin.bayarTagihan(idInvoice, jumlahBayar, metodePembayaran);
-                    System.out.println("Pembayaran berhasil.");
-                    break;
-                    }
+                }
+                
                 System.out.println("Pelanggan dengan nama " + nama + " tidak ditemukan");
                 break;
             default:
